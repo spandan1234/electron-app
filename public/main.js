@@ -14,8 +14,7 @@ function createWindow () {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
-            preload: __dirname + '/preload.js',
-            // zoomFactor: 2.0
+            zoomFactor: 4.0
         }
     })
 
@@ -24,7 +23,13 @@ function createWindow () {
         isDev? "http://localhost:3000": `file://${path.join(__dirname, "../build/index.html")}`
     )
 
-    win.webContents.setZoomFactor(4.0);
+    win.webContents.setZoomFactor(3.0);
+    console.log(win.webContents.getZoomFactor())
+
+    // win.once('ready-to-show', () => {
+    //     win.webContents.setZoomFactor(1.5)
+    //     win.show()
+    // })
 
     // // Open the DevTools.
     // win.webContents.openDevTools()
@@ -55,8 +60,6 @@ app.on('activate', () => {
         createWindow()
     }
 })
-
-
 
 app.on('zoom-changed', ()=>{
     console.log("zoom changed")
